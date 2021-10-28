@@ -44,14 +44,14 @@ public class MainActivity extends AppCompatActivity implements HandlerCallback {
     @Override
     public void handleMessage(Message msg) {
         switch(msg.what) {
-            case RestApiMgr.GET_OK:
+            case HandlerCallback.GET_OK:
                 JSONArray array = (JSONArray)msg.obj;
                 Log.i("API : ", array.toString());
                 break;
-            case RestApiMgr.PUT_OK:
+            case HandlerCallback.PUT_OK:
                 Log.i("API : ", "Successfully Updated.");
                 break;
-            case RestApiMgr.HTTP_ERROR:
+            case HandlerCallback.HTTP_ERROR:
                 Log.i("API : ", "Http Server interaction Error.");
                 break;
         }

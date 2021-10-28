@@ -8,6 +8,9 @@ public interface HandlerCallback {
     public static final int GET_OK = 0;
     public static final int PUT_OK = 1;
 
+    public static final int ELEVATOR_ERR_CODE = 11;
+
+
     void handleMessage(Message msg);
 
 }

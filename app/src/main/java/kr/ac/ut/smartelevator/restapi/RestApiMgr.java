@@ -4,9 +4,6 @@ import android.os.Handler;
 import android.os.Message;
 import android.util.Log;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -22,12 +19,10 @@ import java.net.URL;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
+import kr.ac.ut.smartelevator.common.HandlerCallback;
+
 public class RestApiMgr {
     public static final int N_THREADS = 4;
-
-    public static final int HTTP_ERROR = -1;
-    public static final int GET_OK = 0;
-    public static final int PUT_OK = 1;
 
     private ExecutorService executorService;
     private Handler handler;
@@ -121,15 +116,15 @@ public class RestApiMgr {
                             buffer.append("]");
                         }
                         array = new JSONArray(buffer.toString());
-                        msg.what = RestApiMgr.GET_OK;
+                        msg.what = HandlerCallback.GET_OK;
                         msg.obj = array;
                     }
                     else {
-                        msg.what = RestApiMgr.PUT_OK;
+                        msg.what = HandlerCallback.PUT_OK;
                     }
                 }
                 else {
-                    msg.what = RestApiMgr.HTTP_ERROR;
+                    msg.what = HandlerCallback.HTTP_ERROR;
                 }
                 handler.post(new Runnable() {
                     @Override

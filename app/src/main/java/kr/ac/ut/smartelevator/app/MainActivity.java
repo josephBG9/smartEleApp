@@ -13,11 +13,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.util.concurrent.Executor;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-
-import kr.ac.ut.smartelevator.restapi.HandlerCallback;
+import kr.ac.ut.smartelevator.common.HandlerCallback;
 import kr.ac.ut.smartelevator.restapi.RestApiMgr;
 
 public class MainActivity extends AppCompatActivity implements HandlerCallback {

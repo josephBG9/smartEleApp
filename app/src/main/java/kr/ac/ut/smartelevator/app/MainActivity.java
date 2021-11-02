@@ -17,7 +17,7 @@ import java.util.concurrent.Executors;
 import kr.ac.ut.smartelevator.common.HandlerCallback;
 import kr.ac.ut.smartelevator.sock.SockClient;
 
-public class MainActivity extends AppCompatActivity implements HandlerCallback {
+public class  MainActivity extends AppCompatActivity implements HandlerCallback {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,7 +27,7 @@ public class MainActivity extends AppCompatActivity implements HandlerCallback {
         Handler handler = HandlerCompat.createAsync(Looper.getMainLooper());
         ExecutorService executorService = Executors.newFixedThreadPool(4);
         SockClient client = new SockClient(executorService, handler, this);
-        client.getElevatorErrorCode("210.119.145.6", 12345);
+        client.getElevatorErrorCode("192.168.5.5", 5000);
 
 
     }

@@ -45,6 +45,7 @@ public class SockClient {
     public short getErrorCode(byte[] packet, int idx) {
         int pos = idx * SockClient.ERROR_CODE_LENGTH + SockClient.ERROR_CODE_START + 6;
         ByteBuffer byteBuffer = ByteBuffer.allocate(2);
+        byteBuffer.order(ByteOrder.LITTLE_ENDIAN);
         byteBuffer.put(packet[pos]);
         byteBuffer.put(packet[pos+1]);
         return byteBuffer.getShort(0);
@@ -64,8 +65,8 @@ public class SockClient {
         executorService.execute(new Runnable() {
             @Override
             public void run() {
-                byte[] reqData = { (byte) 0xA5, (byte) 0x5A, (byte) 0x06, (byte) 0x00,
-                        (byte) 0x21, (byte) 0x46, (byte) 0x81 };
+                byte[] reqData = { (byte) 0xA5, (byte) 0x5A, (byte) 0x09, (byte) 0x00,
+                        (byte) 0x21, (byte)0x18, (byte)0x0B, (byte) 0x0D, (byte) 0x0A };
                 byte[] resData = new byte[1024];
                 int readBytes;
                 JSONObject jsonObject = new JSONObject();
@@ -80,10 +81,14 @@ public class SockClient {
                 try {
                     client = new Socket(ipaddr, port);
 
+                    client.getOutputStream().write(reqData);
+                    client.getOutputStream().flush();
+
                     while(true) {
                         // Send the request packet.
-                        client.getOutputStream().write(reqData);
-                        client.getOutputStream().flush();
+
+                        //client.getOutputStream().write(reqData);
+                        //client.getOutputStream().flush();
 
                         // Receive the error codes from elevator module.
                         readBytes = 0;
@@ -95,13 +100,18 @@ public class SockClient {
                             break;
 
                         jsonObject.put("lift_id", getElevatorID(resData));
-
+                        Log.i("ELEVATOR","n of Code : " + resData[SockClient.ERROR_COUNT]);
+                        Log.i("ELEVATOR", "*************************************");
                         for(int j=0; j<resData[SockClient.ERROR_COUNT]; j++) {
                             errData = new JSONObject();
                             errData.put("date", getErrorDate(resData, j));
                             errData.put("event_code", getErrorCode(resData, j));
+
+                            Log.i("ELEVATOR", errData.toString());
+
                             jsonArray.put(errData);
                         }
+
                     }
 
                     Message msg = new Message();

@@ -48,14 +48,14 @@ public class SockClient {
         msgProc = proc;
     }
 
-    public String getErrorDate(byte[] packet, int idx) {
+    private String getErrorDate(byte[] packet, int idx) {
         int pos = idx * SockClient.ERROR_CODE_LENGTH + SockClient.ERROR_CODE_START;
 
         return String.format("%d-%d-%d %d:%d:%d", packet[pos], packet[pos+1],
                 packet[pos+2], packet[pos+3],packet[pos+4], packet[pos+5]);
     }
 
-    public short getErrorCode(byte[] packet, int idx) {
+    private short getErrorCode(byte[] packet, int idx) {
         int pos = idx * SockClient.ERROR_CODE_LENGTH + SockClient.ERROR_CODE_START + 6;
         ByteBuffer byteBuffer = ByteBuffer.allocate(2);
         byteBuffer.order(ByteOrder.LITTLE_ENDIAN);
@@ -65,7 +65,7 @@ public class SockClient {
         return byteBuffer.getShort(0);
     }
 
-    public String getElevatorID(byte[] packet) {
+    private String getElevatorID(byte[] packet) {
         String id = new String();
         for(int i=SockClient.ELEVATOR_ID_START;
             i<SockClient.ELEVATOR_ID_START+SockClient.ELEVATOR_ID_LENGTH; i++) {
@@ -113,6 +113,7 @@ public class SockClient {
 
                         while(recvdBytes < 1024) {
                             // 여기는 추가적으로 오류 검사를 할 수 있어야 함.
+                            Log.i("ELEVATOR", "Waiting for receiving");
                             readBytes = client.getInputStream().read(resData, recvdBytes, 1024 - recvdBytes);
                             recvdBytes += readBytes;
 

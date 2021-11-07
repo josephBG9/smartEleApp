@@ -38,7 +38,7 @@ public class  MainActivity extends AppCompatActivity implements HandlerCallback 
 
         Handler handler = HandlerCompat.createAsync(Looper.getMainLooper());
         ExecutorService executorService = Executors.newFixedThreadPool(4);
-        client = new SockClient(executorService, handler, this, this);
+        client = new SockClient(executorService, handler, this);
         client.getElevatorErrorCode("192.168.5.5", 5000);
         //client.getElevatorErrorCode("210.119.145.6", 80);
 /*

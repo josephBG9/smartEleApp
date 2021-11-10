@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.os.HandlerCompat;
 
 import android.content.Context;
+import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.Network;
 import android.net.NetworkInfo;
@@ -24,7 +25,7 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 import kr.ac.ut.smartelevator.buffer.BufferMgr;
-
+import kr.ac.ut.smartelevator.ui.ListMainActivity;
 
 public class  MainActivity extends AppCompatActivity {
 
@@ -35,6 +36,10 @@ public class  MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         buffer = new BufferMgr(this);
+
+        Intent intent = new Intent(this, ListMainActivity.class);
+
+        startActivity(intent);
 
     }
 

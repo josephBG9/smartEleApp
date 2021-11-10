@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">Smart Elevator Manager App</string>
+
+    <string name="eleid_str">Ele. ID</string>
+    <string name="elename_str">Name</string>
+    <string name="eleinstall_str">Location</string>
+    <string name="elestate_str">Ele. State</string>
 </resources>

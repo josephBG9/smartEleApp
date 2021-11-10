@@ -25,7 +25,7 @@ public class MainActivity extends AppCompatActivity implements HandlerCallback {
         setContentView(R.layout.activity_main);
 
         handler = HandlerCompat.createAsync(Looper.getMainLooper());
-        RestApiMgr api = new RestApiMgr(handler, "http://boas.asuscomm.com:11001/", this);
+        RestApiMgr api = new RestApiMgr(handler, "http://boas.asuscomm.com:10002/", this);
         api.getFromApiServer("liftdetail/2/");
 
         JSONObject obj = new JSONObject();

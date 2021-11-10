@@ -115,6 +115,7 @@ public class RestApiMgr {
                             buffer.insert(0, "[");
                             buffer.append("]");
                         }
+
                         array = new JSONArray(buffer.toString());
                         msg.what = HandlerCallback.GET_OK;
                         msg.obj = array;

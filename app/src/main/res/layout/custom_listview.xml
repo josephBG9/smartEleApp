@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:layout_marginTop="5dp"
+    android:layout_marginBottom="5dp">
 
     <TextView
         android:id="@+id/eleid"
@@ -12,7 +14,7 @@
         android:layout_weight="1"
         android:text="@string/eleid_str"
         android:textAlignment="center"
-        android:textSize="24sp" />
+        android:textSize="22sp" />
 
     <TextView
         android:id="@+id/elename"
@@ -20,10 +22,10 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="2dp"
         android:layout_marginRight="2dp"
-        android:layout_weight="1.5"
+        android:layout_weight="2"
         android:text="@string/elename_str"
         android:textAlignment="center"
-        android:textSize="24sp" />
+        android:textSize="22sp" />
 
     <TextView
         android:id="@+id/elelocation"
@@ -32,10 +34,9 @@
         android:layout_marginLeft="2dp"
         android:layout_marginRight="2dp"
         android:layout_weight="1"
-        android:background="@color/list_header"
         android:text="@string/eleinstall_str"
-        android:textAlignment="center"
-        android:textSize="24sp" />
+        android:textAlignment="textStart"
+        android:textSize="22sp" />
 
     <TextView
         android:id="@+id/elestate"
@@ -47,7 +48,7 @@
         android:background="@color/list_header"
         android:text="@string/elestate_str"
         android:textAlignment="center"
-        android:textSize="24sp"
+        android:textSize="22sp"
         android:visibility="gone" />
 
 

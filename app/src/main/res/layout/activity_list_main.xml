@@ -23,7 +23,7 @@
             android:text="@string/eleid_str"
             android:textAlignment="center"
             android:textColor="@color/black"
-            android:textSize="24sp" />
+            android:textSize="22sp" />
 
         <TextView
             android:id="@+id/textView2"
@@ -31,12 +31,12 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="2dp"
             android:layout_marginRight="2dp"
-            android:layout_weight="1.5"
+            android:layout_weight="2"
             android:background="@color/list_header"
             android:text="@string/elename_str"
             android:textAlignment="center"
             android:textColor="@color/black"
-            android:textSize="24sp" />
+            android:textSize="22sp" />
 
         <TextView
             android:id="@+id/textView3"
@@ -49,12 +49,13 @@
             android:text="@string/eleinstall_str"
             android:textAlignment="center"
             android:textColor="@color/black"
-            android:textSize="24sp" />
+            android:textSize="22sp" />
 
 
     </LinearLayout>
 
     <ListView
+        android:id="@+id/mylist"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 </LinearLayout>

@@ -5,4 +5,13 @@
     <string name="elename_str">Name</string>
     <string name="eleinstall_str">Location</string>
     <string name="elestate_str">Ele. State</string>
+
+    <string name="maintenance_title">Maintenance Statement</string>
+    <string name="date_title">Date</string>
+    <string name="worker_title">Name</string>
+    <string name="maintenance_state_title">Statement</string>
+
+    <string name="ok_str">Done</string>
+    <string name="cancel_str">Cancel</string>
+
 </resources>

@@ -58,15 +58,16 @@ public class CustomListView extends ArrayAdapter<JSONArray> {
         if(obj != null) {
             try {
                 eleid.setText(String.valueOf(obj.getInt("lift_id")));
-                eleid.setText(obj.getString("lift_name"));
-                eleid.setText(obj.getString("address"));
-                eleid.setText(obj.getString("lift_status"));
+                elename.setText(obj.getString("lift_name"));
+                elelocation.setText(obj.getString("address").substring(0, 4) + "...");
+                elestate.setText(obj.getString("lift_status"));
 
             } catch (JSONException e) {
                 e.printStackTrace();
                 Log.i("ELEVATOR","JSONObject conversion error : CustonListView");
             }
         }
-        return super.getView(position, convertView, parent);
+        return view;
+        //return super.getView(position, convertView, parent);
     }
 }

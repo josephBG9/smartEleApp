@@ -16,7 +16,7 @@ import org.json.JSONObject;
 import kr.ac.ut.smartelevator.common.HandlerCallback;
 import kr.ac.ut.smartelevator.restapi.RestApiMgr;
 
-public class MainActivity extends AppCompatActivity implements HandlerCallback {
+public class MainActivity extends AppCompatActivity implements Handler.Callback {
 
     private Handler handler;
     @Override
@@ -24,8 +24,11 @@ public class MainActivity extends AppCompatActivity implements HandlerCallback {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        handler = HandlerCompat.createAsync(Looper.getMainLooper());
-        RestApiMgr api = new RestApiMgr(handler, "http://boas.asuscomm.com:10002/", this);
+        handler = new Handler(this);
+
+        //handler = HandlerCompat.createAsync(Looper.getMainLooper());
+        //RestApiMgr api = new RestApiMgr(handler, "http://boas.asuscomm.com:10002/", this);
+        RestApiMgr api = new RestApiMgr(handler, "http://boas.asuscomm.com:10002/" );
         api.getFromApiServer("liftdetail/2/");
 
         JSONObject obj = new JSONObject();
@@ -42,7 +45,7 @@ public class MainActivity extends AppCompatActivity implements HandlerCallback {
     }
 
     @Override
-    public void handleMessage(Message msg) {
+    public boolean handleMessage(Message msg) {
         switch(msg.what) {
             case HandlerCallback.GET_OK:
                 JSONArray array = (JSONArray)msg.obj;
@@ -55,5 +58,6 @@ public class MainActivity extends AppCompatActivity implements HandlerCallback {
                 Log.i("API : ", "Http Server interaction Error.");
                 break;
         }
+        return true;
     }
 }

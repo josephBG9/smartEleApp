@@ -37,6 +37,14 @@ public class RestApiMgr {
         this.target = target;
     }
 
+    public RestApiMgr(Handler handler, String urlBase) {
+        this.handler = handler;
+        this.urlBase = urlBase;
+        executorService = Executors.newFixedThreadPool(RestApiMgr.N_THREADS);
+
+       // this.target = target;
+    }
+
 
     public void getFromApiServer(String method, String urlFile) {
         executorService.execute(new ApiServerMgr(method, urlBase+urlFile, handler, null ));
@@ -127,12 +135,13 @@ public class RestApiMgr {
                 else {
                     msg.what = HandlerCallback.HTTP_ERROR;
                 }
-                handler.post(new Runnable() {
-                    @Override
-                    public void run() {
-                        target.handleMessage(msg);
-                    }
-                });
+                handler.sendMessage(msg);
+                //handler.post(new Runnable() {
+                //    @Override
+                //    public void run() {
+                //        target.handleMessage(msg);
+                //    }
+                //});
 
             } catch (MalformedURLException e) {
                 Log.i("API : ", "URL(" + urlStr + ") is not valied.");

@@ -47,6 +47,10 @@ public class SockClient {
         this.handler = handler;
         msgProc = proc;
     }
+    public SockClient(ExecutorService executorService, Handler handler) {
+        this.executorService = executorService;
+        this.handler = handler;
+    }
 
     private String getErrorDate(byte[] packet, int idx) {
         int pos = idx * SockClient.ERROR_CODE_LENGTH + SockClient.ERROR_CODE_START;
@@ -147,12 +151,13 @@ public class SockClient {
                     Message msg = new Message();
                     msg.what = HandlerCallback.ELEVATOR_ERR_CODE;
                     msg.obj = jsonObject;
-                    handler.post(new Runnable() {
-                        @Override
-                        public void run() {
-                            msgProc.handleMessage(msg);
-                        }
-                    });
+                    //handler.post(new Runnable() {
+                    //    @Override
+                    //    public void run() {
+                    //        msgProc.handleMessage(msg);
+                    //    }
+                    //});
+                    handler.sendMessage(msg);
 
                     Log.i("ELEVATOR","Done - reading error code");
 

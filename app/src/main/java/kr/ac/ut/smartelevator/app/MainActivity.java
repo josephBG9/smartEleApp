@@ -25,7 +25,8 @@ import java.util.concurrent.Executors;
 import kr.ac.ut.smartelevator.common.HandlerCallback;
 import kr.ac.ut.smartelevator.sock.SockClient;
 
-public class  MainActivity extends AppCompatActivity implements HandlerCallback {
+//public class  MainActivity extends AppCompatActivity implements HandlerCallback {
+public class  MainActivity extends AppCompatActivity implements Handler.Callback {
     SockClient client;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,9 +37,12 @@ public class  MainActivity extends AppCompatActivity implements HandlerCallback 
 
         Log.i("ELEVATOR","App is started.");
 
-        Handler handler = HandlerCompat.createAsync(Looper.getMainLooper());
+        // Handler handler = HandlerCompat.createAsync(Looper.getMainLooper());
+        Handler handler = new Handler(this);
+
         ExecutorService executorService = Executors.newFixedThreadPool(4);
-        client = new SockClient(executorService, handler, this);
+        // client = new SockClient(executorService, handler, this);
+        client = new SockClient(executorService, handler);
         //client.getElevatorErrorCode("192.168.5.5", 5000);
         client.getElevatorErrorCode("210.119.145.6", 12345);
 /*
@@ -58,7 +62,7 @@ public class  MainActivity extends AppCompatActivity implements HandlerCallback 
     }
 
     @Override
-    public void handleMessage(Message msg) {
+    public boolean handleMessage(Message msg) {
         Log.i("ELEVATOR","Handler.....");
         if(msg.what == HandlerCallback.ELEVATOR_ERR_CODE) {
             JSONObject obj = (JSONObject)msg.obj;
@@ -71,7 +75,7 @@ public class  MainActivity extends AppCompatActivity implements HandlerCallback 
 
             Log.i("ELEVATOR", ((JSONObject)msg.obj).toString());
         }
-
+        return true;
     }
 
     public void onClick(View v) {

@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.os.HandlerCompat;
 
 import android.content.Context;
+import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.Network;
 import android.net.NetworkInfo;
@@ -34,7 +35,7 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 import kr.ac.ut.smartelevator.buffer.BufferMgr;
-
+import kr.ac.ut.smartelevator.ui.ListMainActivity;
 
 import kr.ac.ut.smartelevator.common.HandlerCallback;
 import kr.ac.ut.smartelevator.restapi.RestApiMgr;
@@ -92,6 +93,10 @@ public class MainActivity extends AppCompatActivity implements HandlerCallback {
 
 
         buffer = new BufferMgr(this);
+
+        Intent intent = new Intent(this, ListMainActivity.class);
+
+        startActivity(intent);
 
     }
 

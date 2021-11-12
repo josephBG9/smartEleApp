@@ -1,105 +1,37 @@
 package kr.ac.ut.smartelevator.app;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.os.HandlerCompat;
 
-import android.content.Context;
 import android.content.Intent;
-import android.net.ConnectivityManager;
-import android.net.Network;
-import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.util.Log;
 
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Map;
-
-import kr.ac.ut.smartelevator.utils.JSONMgr;
 import android.os.Handler;
-import android.os.Looper;
 import android.os.Message;
-import android.telephony.CarrierConfigManager;
-import android.util.Log;
-import android.view.View;
 
 import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
 
-import java.util.Random;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-
-import kr.ac.ut.smartelevator.buffer.BufferMgr;
+import kr.ac.ut.smartelevator.restapi.RestApiMgr;
 import kr.ac.ut.smartelevator.ui.ListMainActivity;
 
 import kr.ac.ut.smartelevator.common.HandlerCallback;
-import kr.ac.ut.smartelevator.restapi.RestApiMgr;
 
-    BufferMgr buffer;
-public class MainActivity extends AppCompatActivity implements HandlerCallback {
+public class MainActivity extends AppCompatActivity implements Handler.Callback {
 
     private Handler handler;
+    private RestApiMgr restApiMgr;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-/*
- * Testing for JSONMgr class.
- * JSONMgr.toJSON() : HashMap Object to JSON Object
- * JSONMgr.fromJSON() : JSON Object to HashMap Object.
- *
- *
-        JSONMgr jsonMgr = new JSONMgr();
-
-        HashMap<String,Object> map = new HashMap<String, Object>();
-        JSONObject jsonObject;
-        HashMap<String,Object> map2;
-
-        map.put("str","GOOD");
-        map.put("int", 123);
-        map.put("float", 3.14F);
-        map.put("boolean", true);
-
-        Log.i("JSON : ", "Starting LOG");
-        for(Map.Entry<String, Object>entry : map.entrySet()) {
-            Log.i("JSON TEST : ", entry.getKey() + " ---> " + entry.getValue());
-        }
-
-        Log.i("JSON : ", "JSON LOG");
-        jsonObject = jsonMgr.toJSON(map);
-        String key;
-        Iterator<String> itr = jsonObject.keys();
-        while(itr.hasNext()) {
-            key = itr.next();
-            try {
-                Log.i("JSON TEST", key + "-->" + jsonObject.get(key));
-            } catch(JSONException e) {
-                Log.i("JSON", "JSON -> HashMap : error for " + key);
-            }
-        }
-
-        map2 = jsonMgr.fromJSON(jsonObject);
-        Log.i("JSON : ", "Ending LOG");
-        for(Map.Entry<String, Object>entry : map2.entrySet()) {
-            Log.i("JSON TEST : ", entry.getKey() + " ---> " + entry.getValue());
-        }
-*/
-
-
-
-        buffer = new BufferMgr(this);
 
         Intent intent = new Intent(this, ListMainActivity.class);
 
         startActivity(intent);
 
     }
-
+/*
     public void onClick(View v) {
         Random rand = new Random();
         if(v == findViewById(R.id.button)) {
@@ -155,9 +87,10 @@ public class MainActivity extends AppCompatActivity implements HandlerCallback {
         api.getFromApiServer("liftdetail/2/");
 
     }
+*/
 
     @Override
-    public void handleMessage(Message msg) {
+    public boolean handleMessage(Message msg) {
         switch(msg.what) {
             case HandlerCallback.GET_OK:
                 JSONArray array = (JSONArray)msg.obj;
@@ -170,5 +103,7 @@ public class MainActivity extends AppCompatActivity implements HandlerCallback {
                 Log.i("API : ", "Http Server interaction Error.");
                 break;
         }
+
+        return false;
     }
 }

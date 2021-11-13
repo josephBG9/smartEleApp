@@ -42,7 +42,8 @@ public class MainActivity extends AppCompatActivity implements Handler.Callback 
         handler = new Handler(this);
         db = new ElevatorInfoDB(this);
 
-        RestApiMgr api = new RestApiMgr(handler, "http://boas.asuscomm.com:10002/" );
+        //RestApiMgr api = new RestApiMgr(handler, "http://boas.asuscomm.com:10002/" );
+        RestApiMgr api = new RestApiMgr(handler, getString(R.string.urlBase) );
         api.getFromApiServer("afterdate/?date=" + date);
 
     }

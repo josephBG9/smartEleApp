@@ -16,4 +16,6 @@
 
     <string name="db_name">ElevatorDB</string>
 
+    <string name="urlBase">http://boas.asuscomm.com:10002/</string>
+
 </resources>

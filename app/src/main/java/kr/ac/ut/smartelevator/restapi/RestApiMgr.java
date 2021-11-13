@@ -29,6 +29,8 @@ public class RestApiMgr {
     private String urlBase;
     private HandlerCallback target;
 
+    // the following constructor may not be needed.
+    // 21.11.13.
     public RestApiMgr(Handler handler, String urlBase, HandlerCallback target) {
         this.handler = handler;
         this.urlBase = urlBase;

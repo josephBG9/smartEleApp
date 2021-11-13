@@ -29,12 +29,22 @@ public class RestApiMgr {
     private String urlBase;
     private HandlerCallback target;
 
+    // the following constructor may not be needed.
+    // 21.11.13.
     public RestApiMgr(Handler handler, String urlBase, HandlerCallback target) {
         this.handler = handler;
         this.urlBase = urlBase;
         executorService = Executors.newFixedThreadPool(RestApiMgr.N_THREADS);
 
         this.target = target;
+    }
+
+    public RestApiMgr(Handler handler, String urlBase) {
+        this.handler = handler;
+        this.urlBase = urlBase;
+        executorService = Executors.newFixedThreadPool(RestApiMgr.N_THREADS);
+
+       // this.target = target;
     }
 
 
@@ -127,12 +137,13 @@ public class RestApiMgr {
                 else {
                     msg.what = HandlerCallback.HTTP_ERROR;
                 }
-                handler.post(new Runnable() {
-                    @Override
-                    public void run() {
-                        target.handleMessage(msg);
-                    }
-                });
+                handler.sendMessage(msg);
+                //handler.post(new Runnable() {
+                //    @Override
+                //    public void run() {
+                //        target.handleMessage(msg);
+                //    }
+                //});
 
             } catch (MalformedURLException e) {
                 Log.i("API : ", "URL(" + urlStr + ") is not valied.");

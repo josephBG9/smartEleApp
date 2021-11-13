@@ -68,9 +68,7 @@ public class MainActivity extends AppCompatActivity implements Handler.Callback 
                 editor.putString("update_date",currentDate);
                 editor.commit();
 
-
                 JSONArray dbdata = db.getElevatorInfo();
-
                 Log.i("ELEVATOR : ", "From DB Contents : " + dbdata.toString());
 
                 break;

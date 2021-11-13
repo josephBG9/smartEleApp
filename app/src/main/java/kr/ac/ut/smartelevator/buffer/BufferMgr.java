@@ -18,6 +18,7 @@ import java.util.stream.Stream;
 public class BufferMgr {
     public static final int TYPE_ELEVATOR_ERROR = 1;
     public static final int TYPE_ELEVATOR_MAINTENANCE = 2;
+
     private Context context;
 
     public BufferMgr(Context context) {

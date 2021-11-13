@@ -10,8 +10,13 @@ import android.os.Handler;
 import android.os.Message;
 
 import org.json.JSONArray;
+import org.json.JSONObject;
+
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 import kr.ac.ut.smartelevator.restapi.RestApiMgr;
+import kr.ac.ut.smartelevator.sock.SockClient;
 import kr.ac.ut.smartelevator.ui.ListMainActivity;
 
 import kr.ac.ut.smartelevator.common.HandlerCallback;
@@ -20,15 +25,24 @@ public class MainActivity extends AppCompatActivity implements Handler.Callback 
 
     private Handler handler;
     private RestApiMgr restApiMgr;
+    private SockClient client;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Intent intent = new Intent(this, ListMainActivity.class);
+        Handler handler = new Handler(this);
 
-        startActivity(intent);
+        ExecutorService executorService = Executors.newFixedThreadPool(4);
+        // client = new SockClient(executorService, handler, this);
+        client = new SockClient(executorService, handler);
+        //client.getElevatorErrorCode("192.168.5.5", 5000);
+        client.getElevatorErrorCode("210.119.145.6", 12345);
+
+        //Intent intent = new Intent(this, ListMainActivity.class);
+
+        //startActivity(intent);
 
     }
 /*
@@ -92,15 +106,19 @@ public class MainActivity extends AppCompatActivity implements Handler.Callback 
     @Override
     public boolean handleMessage(Message msg) {
         switch(msg.what) {
+            case HandlerCallback.ELEVATOR_ERR_CODE:
+                JSONObject obj = (JSONObject)msg.obj;
+                Log.i("ELEVATOR : ", obj.toString());
+                break;
             case HandlerCallback.GET_OK:
                 JSONArray array = (JSONArray)msg.obj;
-                Log.i("API : ", array.toString());
+                Log.i("ELEVATOR : ", array.toString());
                 break;
             case HandlerCallback.PUT_OK:
-                Log.i("API : ", "Successfully Updated.");
+                Log.i("ELEVATOR : ", "Successfully Updated.");
                 break;
             case HandlerCallback.HTTP_ERROR:
-                Log.i("API : ", "Http Server interaction Error.");
+                Log.i("ELEVATOR : ", "Http Server interaction Error.");
                 break;
         }
 

@@ -18,4 +18,7 @@
 
     <string name="urlBase">http://boas.asuscomm.com:10002/</string>
 
+    <string name="wifiap_ip">210.119.145.6</string>
+    <string name="wifiap_port">12345</string>
+
 </resources>

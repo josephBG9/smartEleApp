@@ -96,7 +96,7 @@ public class SockClient {
                 JSONObject errData;
 
                 try {
-                    jsonObject.put("lift_err", jsonArray);
+                    jsonObject.put("lift_errors", jsonArray);
                 } catch (JSONException e) {
                     Log.i("SOCKET", "JSONObject put() array error : " + e);
                 }
@@ -137,8 +137,8 @@ public class SockClient {
 
                         for(int j=0; j<resData[SockClient.ERROR_COUNT]; j++) {
                             errData = new JSONObject();
-                            errData.put("date", getErrorDate(resData, j));
-                            errData.put("event_code", getErrorCode(resData, j));
+                            errData.put("datetime", getErrorDate(resData, j));
+                            errData.put("errCode", getErrorCode(resData, j));
                             jsonArray.put(errData);
                         }
 

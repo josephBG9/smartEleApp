@@ -49,7 +49,11 @@ public class SockClient {
     private String getErrorDate(byte[] packet, int idx) {
         int pos = idx * SockClient.ERROR_CODE_LENGTH + SockClient.ERROR_CODE_START;
 
-        return String.format("%d-%d-%d %d:%d:%d", packet[pos], packet[pos+1],
+        /*
+            현재 연도는 21년과 같이 전송되지만 데이터베이스에는 2021년과 같이 저장됨.
+            따라서, 일단 연도 데이터 앞에 20을 붙임.
+         */
+        return String.format("20%d-%d-%d %d:%d:%d", packet[pos], packet[pos+1],
                 packet[pos+2], packet[pos+3],packet[pos+4], packet[pos+5]);
     }
 

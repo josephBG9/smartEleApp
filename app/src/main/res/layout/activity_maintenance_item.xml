@@ -141,9 +141,10 @@
             android:id="@+id/ok_btn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
             android:layout_marginLeft="30dp"
             android:layout_marginRight="30dp"
+            android:layout_weight="1"
+            android:onClick="btnDone"
             android:text="@string/ok_str" />
 
         <Button
@@ -153,6 +154,7 @@
             android:layout_marginLeft="30dp"
             android:layout_marginRight="30dp"
             android:layout_weight="1"
+            android:onClick="btnCancle"
             android:text="@string/cancel_str" />
     </LinearLayout>
 

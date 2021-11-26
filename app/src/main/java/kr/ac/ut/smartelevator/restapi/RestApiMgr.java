@@ -58,20 +58,28 @@ public class RestApiMgr {
     }
 
     public void putToApiServer(String method, String urlFile, JSONObject data) {
-        executorService.execute(new ApiServerMgr(method, urlBase+urlFile, handler, data ));
+        executorService.execute(new ApiServerMgr<JSONObject>(method, urlBase+urlFile, handler, data ));
     }
 
     public void putToApiServer(String urlFile, JSONObject data) {
-        putToApiServer("PUT", urlFile, data);
+        putToApiServer("POST", urlFile, data);
     }
 
-    private class ApiServerMgr implements Runnable {
+    public void putToApiServer(String method, String urlFile, JSONArray data) {
+        executorService.execute(new ApiServerMgr<JSONArray>(method, urlBase+urlFile, handler, data ));
+    }
+
+    public void putToApiServer(String urlFile, JSONArray data) {
+        putToApiServer("POST", urlFile, data);
+    }
+
+    private class ApiServerMgr<T> implements Runnable {
         private String requestMethod;
         private String urlStr;
         private Handler handler;
-        private JSONObject data;
+        private T data;
 
-        public ApiServerMgr(String method, String urlStr, Handler handler,  JSONObject data ) {
+        public ApiServerMgr(String method, String urlStr, Handler handler,  T data ) {
             requestMethod = method;
             this.urlStr = urlStr;
             this.handler = handler;
